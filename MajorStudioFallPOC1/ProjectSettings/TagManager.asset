@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - corpseOnGround
   layers:
   - Default
   - TransparentFX
@@ -11,9 +12,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - ground
+  - weapon
+  - character
   - 
   - 
   - 
@@ -38,6 +39,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: environment
+    uniqueID: 2429051123
+    locked: 0
+  - name: back
+    uniqueID: 668487097
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
