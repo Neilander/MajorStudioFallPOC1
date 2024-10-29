@@ -300,7 +300,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rotatingObject: {fileID: 2412913955767269857}
-  HpValue: 50
+  HpValue: 20
   manager: {fileID: 8568943243336367375}
   inControl: 1
   dropX: {x: -4, y: 4}
