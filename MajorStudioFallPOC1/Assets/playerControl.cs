@@ -185,7 +185,7 @@ public class playerControl : MonoBehaviour
         if (curHp <= 0)
         {
             GameObject gmo = Instantiate(corpse, transform.position, Quaternion.identity);
-            gmo.GetComponent<SpriteRenderer>().color = renderer.color;
+            gmo.GetComponent<SpriteRenderer>().color = isLeftSide? Color.green: Color.red;
             gmo.GetComponent<deathOnGroundScript>().ifLeft = isLeftSide;
             manager.resetWeapon();
             transform.position = new Vector3(Random.Range(dropX.x, dropX.y), 50, 0);
@@ -227,7 +227,7 @@ public class playerControl : MonoBehaviour
     public void genCorpse(Vector3 pos)
     {
         GameObject gmo = Instantiate(corpse, pos, Quaternion.identity);
-        gmo.GetComponent<SpriteRenderer>().color = renderer.color;
+        gmo.GetComponent<SpriteRenderer>().color = isLeftSide ? Color.green : Color.red;
         gmo.GetComponent<deathOnGroundScript>().ifLeft = isLeftSide;
     }
 }

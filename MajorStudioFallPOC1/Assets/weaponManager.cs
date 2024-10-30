@@ -55,12 +55,14 @@ public class weaponManager : MonoBehaviour
         if (curIndex >= allCorpse.Count)
             return;
         allCorpse[curIndex].SetActive(true);
-        allCorpse[curIndex].GetComponent<SpriteRenderer>().color = c;
+        allCorpse[curIndex].GetComponent<SpriteRenderer>().color = Color.white;
         curIndex += 1;
     }
 
     public void reportAttack(playerControl tar, int n)
     {
+        if (tar == control)
+            return;
         if ((!damageRecord.ContainsKey(tar))&& canDamage)
         {
             damageRecord.Add(tar, n);
