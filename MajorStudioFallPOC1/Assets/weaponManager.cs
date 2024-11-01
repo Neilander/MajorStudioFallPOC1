@@ -65,8 +65,9 @@ public class weaponManager : MonoBehaviour
             return;
         if ((!damageRecord.ContainsKey(tar))&& canDamage)
         {
+            Vector3 forceV = new Vector3(control.curAtkSign,3,0);
             damageRecord.Add(tar, n);
-            tar.takeDamage(n);
+            tar.takeDamage(n, forceV);
         }
         
     }

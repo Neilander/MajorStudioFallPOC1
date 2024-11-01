@@ -18,6 +18,11 @@ public class playerControl : MonoBehaviour
     public GameObject corpse;
     public SpriteRenderer renderer;
     public float detectionRadius = 5f;     // 检测半径
+    public Vector2 groundCheckSize = new Vector2(0.5f, 0.1f);
+    public float curAtkSign;
+    public float takeDamageForceScale;
+    public float waitTimeToRecover;
+
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -26,6 +31,10 @@ public class playerControl : MonoBehaviour
     private float scaleX;
     private float scaleY;
     private float scaleZ;
+
+    private Coroutine recoverCor;
+    
+    
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +52,7 @@ public class playerControl : MonoBehaviour
         if (inControl)
         {
             // 检测是否在地面上
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+            isGrounded = CheckIfGrounded();//Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
             
 
@@ -83,7 +92,7 @@ public class playerControl : MonoBehaviour
         }
         else
         {
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+            isGrounded = CheckIfGrounded();
             if (isGrounded)
             {
                 rb.gravityScale = 2;
@@ -119,16 +128,7 @@ public class playerControl : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        // 可视化地面检测范围
-        if (groundCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, 0.2f);
-        }
-    }
-
+   
     public void TriggerRotation()
     {
         if (!isRotating)
@@ -144,11 +144,11 @@ public class playerControl : MonoBehaviour
         isRotating = true;
         float rotationDuration = manager.reportTime();     // 每次180度旋转的持续时间（秒）
         float elapsed;
-        float sign = Mathf.Sign(transform.localScale.x);
+        curAtkSign = Mathf.Sign(transform.localScale.x);
 
         // 第一步：旋转180度
         Quaternion initialRotation = rotatingObject.rotation;
-        Quaternion halfRotation = initialRotation * Quaternion.Euler(0, 0, 180*sign);
+        Quaternion halfRotation = initialRotation * Quaternion.Euler(0, 0, 180*curAtkSign);
         elapsed = 0f;
         while (elapsed < rotationDuration)
         {
@@ -161,7 +161,7 @@ public class playerControl : MonoBehaviour
         rotatingObject.rotation = halfRotation;
 
         // 第二步：再旋转180度
-        Quaternion fullRotation = halfRotation * Quaternion.Euler(0, 0, 180*sign);
+        Quaternion fullRotation = halfRotation * Quaternion.Euler(0, 0, 180*curAtkSign);
         elapsed = 0f;
         while (elapsed < rotationDuration)
         {
@@ -177,22 +177,38 @@ public class playerControl : MonoBehaviour
         manager.finishAttack();
     }
 
-    public void takeDamage(int n)
+    public void takeDamage(int n, Vector2 dir)
     {
-        Debug.Log(name + "收到了"+n+"点伤害");
+        Debug.Log(name + "收到了"+n+"点伤害,朝向"+dir.x+", "+dir.y);
         curHp -= n;
 
         if (curHp <= 0)
         {
             GameObject gmo = Instantiate(corpse, transform.position, Quaternion.identity);
-            gmo.GetComponent<SpriteRenderer>().color = isLeftSide? Color.green: Color.red;
+            gmo.GetComponent<SpriteRenderer>().color = isLeftSide ? Color.green : Color.red;
             gmo.GetComponent<deathOnGroundScript>().ifLeft = isLeftSide;
             manager.resetWeapon();
             transform.position = new Vector3(Random.Range(dropX.x, dropX.y), 50, 0);
             rb.gravityScale = 1;
             inControl = false;
             curHp = HpValue;
-            
+            if (recoverCor != null)
+            {
+                StopCoroutine(recoverCor);
+            }
+
+        }
+        else
+        {
+            //dir.normalized*takeDamageForceScale
+            Debug.Log("被打飞了！");
+            rb.AddForce(dir.normalized*takeDamageForceScale*n, ForceMode2D.Impulse);
+            inControl = false;
+            if (recoverCor != null)
+            {
+                StopCoroutine(recoverCor);
+            }
+            recoverCor = StartCoroutine(recoverFromNoControl(waitTimeToRecover));
         }
     }
 
@@ -229,5 +245,57 @@ public class playerControl : MonoBehaviour
         GameObject gmo = Instantiate(corpse, pos, Quaternion.identity);
         gmo.GetComponent<SpriteRenderer>().color = isLeftSide ? Color.green : Color.red;
         gmo.GetComponent<deathOnGroundScript>().ifLeft = isLeftSide;
+    }
+
+    private bool CheckIfGrounded()
+    {
+        if (rb != null && rb.velocity.y > 0)
+        {
+            return false;
+        }
+
+        // 第一种情况：检测是否在地面上
+        Collider2D groundCollider = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
+        if (groundCollider != null)
+        {
+            return true;
+        }
+
+        // 第二种情况和第三种情况：检测长方形区域内的所有碰撞物体
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(groundCheck.position, groundCheckSize, 0f);
+        foreach (var collider in colliders)
+        {
+            // 第二种情况：检测是否有带有 "corpseOnGround" 标签的物体
+            if (collider.CompareTag("corpseOnGround"))
+            {
+                return true;
+            }
+
+            // 第三种情况：检测是否有带有 "PlayerControl" 组件且不等于自己
+            playerControl otherPlayer = collider.GetComponent<playerControl>();
+            if (otherPlayer != null && otherPlayer != this)
+            {
+                return true;
+            }
+        }
+
+        // 如果以上条件都不满足，则返回 false
+        return false;
+    }
+
+    // 绘制检测区域（仅在编辑器中可见，方便调试）
+    void OnDrawGizmosSelected()
+    {
+        if (groundCheck != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(groundCheck.position, groundCheckSize);
+        }
+    }
+
+    IEnumerator recoverFromNoControl(float t)
+    {
+        yield return new WaitForSeconds(t);
+        inControl = true;
     }
 }
