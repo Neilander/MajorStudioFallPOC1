@@ -311,7 +311,8 @@ MonoBehaviour:
   groundCheckSize: {x: 1, y: 0.3}
   curAtkSign: 0
   takeDamageForceScale: 3
-  waitTimeToRecover: 1
+  waitTimeToRecover: 4
+  healthRecoverThreshold: 2
 --- !u!1 &7949515235389452361
 GameObject:
   m_ObjectHideFlags: 0

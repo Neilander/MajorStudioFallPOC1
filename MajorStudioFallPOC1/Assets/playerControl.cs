@@ -22,6 +22,7 @@ public class playerControl : MonoBehaviour
     public float curAtkSign;
     public float takeDamageForceScale;
     public float waitTimeToRecover;
+    public float healthRecoverThreshold = 5f;
 
 
     private Rigidbody2D rb;
@@ -31,8 +32,12 @@ public class playerControl : MonoBehaviour
     private float scaleX;
     private float scaleY;
     private float scaleZ;
+    private bool healthRecover = false;
+    private float healthRecoverTimer = 0f;        // 恢复计时器
+    
 
     private Coroutine recoverCor;
+    private Coroutine healthRecoverCor;
     
     
 
@@ -98,6 +103,27 @@ public class playerControl : MonoBehaviour
                 rb.gravityScale = 2;
                 inControl = true;
             }
+        }
+
+        if (healthRecover)
+        {
+
+            // 累加计时器
+            healthRecoverTimer += Time.deltaTime;
+
+            // 如果计时器达到阈值，恢复一点生命并重置计时器
+            if (healthRecoverTimer >= healthRecoverThreshold)
+            {
+                
+                curHp = Mathf.Min(curHp + 1, HpValue);// 恢复 1 点生命值
+                Debug.Log("恢复了，现在是" + curHp);
+                healthRecoverTimer = 0f; // 重置计时器
+            }
+        }
+        else
+        {
+            // 如果不在恢复状态，重置计时器
+            healthRecoverTimer = 0f;
         }
 
     }
@@ -181,6 +207,12 @@ public class playerControl : MonoBehaviour
     {
         Debug.Log(name + "收到了"+n+"点伤害,朝向"+dir.x+", "+dir.y);
         curHp -= n;
+        healthRecover = false;
+
+        if (healthRecoverCor != null)
+        {
+            StopCoroutine(healthRecoverCor);
+        }
 
         if (curHp <= 0)
         {
@@ -209,6 +241,9 @@ public class playerControl : MonoBehaviour
                 StopCoroutine(recoverCor);
             }
             recoverCor = StartCoroutine(recoverFromNoControl(waitTimeToRecover));
+
+            healthRecoverCor = StartCoroutine(waitForRecover(waitTimeToRecover));
+            
         }
     }
 
@@ -297,5 +332,11 @@ public class playerControl : MonoBehaviour
     {
         yield return new WaitForSeconds(t);
         inControl = true;
+    }
+
+    IEnumerator waitForRecover(float t)
+    {
+        yield return new WaitForSeconds(t);
+        healthRecover = true;
     }
 }
