@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{4C6D2CA2-5130-AA82-A15A-7F18F4278B2B}|">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="4c3097ba-4047-47c2-83c3-ea00e3f165ca" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/PlayerControl.cs">
+    <Files>
+      <File FileName="Assets/FirstPersonCamera.cs" Line="7" Column="27" />
+      <File FileName="Assets/PlayerControl.cs" Line="364" Column="6" />
+      <File FileName="Assets/weaponScript.cs" Line="70" Column="25" />
+      <File FileName="Assets/enTestScript.cs" Line="107" Column="1" />
+      <File FileName="Assets/bulletScript.cs" Line="10" Column="34" />
+      <File FileName="Assets/backShield.cs" Line="23" Column="64" />
+      <File FileName="Assets/hitbox.cs" Line="30" Column="43" />
+      <File FileName="Assets/enManagerInScene.cs" Line="8" Column="21" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="shieldAndRotate" expanded="True">
+            <Node name="Assets" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>
