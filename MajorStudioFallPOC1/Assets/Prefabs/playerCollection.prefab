@@ -310,8 +310,8 @@ MonoBehaviour:
   detectionRadius: 1
   groundCheckSize: {x: 1, y: 0.3}
   curAtkSign: 0
-  takeDamageForceScale: 3
-  waitTimeToRecover: 4
+  takeDamageForceScale: 2
+  waitTimeToRecover: 1
   healthRecoverThreshold: 2
   scoreText: {fileID: 0}
   destroyY: -8.5
