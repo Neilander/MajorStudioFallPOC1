@@ -16,6 +16,9 @@ public class gemScript : MonoBehaviour
     public float floatFrequency = 2f;        // 浮动的频率
     private Vector3 originalPosition;         // 初始位置，用于浮动基准
 
+
+    public float destroyY = -12f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,6 +44,11 @@ public class gemScript : MonoBehaviour
             // 使用 sin 函数实现上下浮动效果
             float newY = originalPosition.y + Mathf.Sin(Time.time * floatFrequency) * floatAmplitude;
             transform.position = new Vector3(originalPosition.x, newY, transform.position.z);
+        }
+
+        if (transform.position.y < destroyY)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -83,6 +91,13 @@ public class gemScript : MonoBehaviour
 
         // 施加力
         rb.AddForce(direction * launchForce, ForceMode2D.Impulse);
+    }
+
+    public void initializeJem(float chooseAngle, float launchForceTimer)
+    {
+        float angle = Random.Range(-chooseAngle, chooseAngle);
+        Vector2 direction = Quaternion.Euler(0, 0, angle) * Vector2.up;
+        rb.AddForce(direction * launchForce*launchForceTimer, ForceMode2D.Impulse);
     }
 
     // 在编辑器中绘制检测区域的 Gizmo

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class playerControl : MonoBehaviour
 {
@@ -23,6 +24,14 @@ public class playerControl : MonoBehaviour
     public float takeDamageForceScale;
     public float waitTimeToRecover;
     public float healthRecoverThreshold = 5f;
+    [Header("Score Ui")]
+    public TextMeshProUGUI scoreText;
+
+    [Header("death check height")]
+    public float destroyY = -8.5f;
+
+    [Header("gem generator after death")]
+    public GameObject generatorPrefab;
 
 
     private Rigidbody2D rb;
@@ -38,7 +47,7 @@ public class playerControl : MonoBehaviour
 
     private Coroutine recoverCor;
     private Coroutine healthRecoverCor;
-    
+    private int curScore = 0;
     
 
     // Start is called before the first frame update
@@ -124,6 +133,28 @@ public class playerControl : MonoBehaviour
         {
             // 如果不在恢复状态，重置计时器
             healthRecoverTimer = 0f;
+        }
+
+        if (transform.position.y < destroyY)
+        {
+            Instantiate(generatorPrefab, transform.position, Quaternion.identity).GetComponent<gemGenerator>().GenInOnce(curScore);
+            curScore = 0;
+            scoreText.text = "0";
+
+            GameObject gmo = Instantiate(corpse, transform.position, Quaternion.identity);
+            gmo.GetComponent<SpriteRenderer>().color = isLeftSide ? Color.green : Color.red;
+            gmo.GetComponent<deathOnGroundScript>().ifLeft = isLeftSide;
+            manager.resetWeapon(false);
+            transform.position = new Vector3(Random.Range(dropX.x, dropX.y), 50, 0);
+            rb.gravityScale = 1;
+            inControl = false;
+            curHp = HpValue;
+            if (recoverCor != null)
+            {
+                StopCoroutine(recoverCor);
+            }
+
+            
         }
 
     }
@@ -216,6 +247,9 @@ public class playerControl : MonoBehaviour
 
         if (curHp <= 0)
         {
+            Instantiate(generatorPrefab, transform.position, Quaternion.identity).GetComponent<gemGenerator>().GenInOnce(curScore);
+            curScore = 0;
+            scoreText.text = "0";
             GameObject gmo = Instantiate(corpse, transform.position, Quaternion.identity);
             gmo.GetComponent<SpriteRenderer>().color = isLeftSide ? Color.green : Color.red;
             gmo.GetComponent<deathOnGroundScript>().ifLeft = isLeftSide;
@@ -228,6 +262,8 @@ public class playerControl : MonoBehaviour
             {
                 StopCoroutine(recoverCor);
             }
+
+            
 
         }
         else
@@ -338,5 +374,15 @@ public class playerControl : MonoBehaviour
     {
         yield return new WaitForSeconds(t);
         healthRecover = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<gemScript>() != null&& inControl)
+        {
+            Destroy(collision.gameObject);
+            curScore += 1;
+            scoreText.text = curScore.ToString();
+        }
     }
 }
