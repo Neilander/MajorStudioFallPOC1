@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gemScript : MonoBehaviour
+public class gemScript : EndAble
 {
     public float launchForce = 5f;            // 施加的力大小
     public Rigidbody2D rb;
@@ -27,6 +27,8 @@ public class gemScript : MonoBehaviour
 
     void Update()
     {
+        
+
         // 检测是否在地面上
         isGrounded = CheckIfGrounded();
 

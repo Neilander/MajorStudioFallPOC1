@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class playerControl : MonoBehaviour
+public class playerControl : EndAble
 {
 
     public float moveSpeed = 5f;        
@@ -47,7 +47,7 @@ public class playerControl : MonoBehaviour
 
     private Coroutine recoverCor;
     private Coroutine healthRecoverCor;
-    private int curScore = 0;
+    public int curScore = 0;
     
 
     // Start is called before the first frame update
@@ -63,6 +63,18 @@ public class playerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ifEndGame)
+        {
+            if (!rb.isKinematic)
+            {
+                //rb.gravityScale = 0;
+                StopAllCoroutines();
+                rb.isKinematic = true;
+                rb.velocity = Vector2.zero;
+            }
+            return;
+        }
+
         if (inControl)
         {
             // 检测是否在地面上

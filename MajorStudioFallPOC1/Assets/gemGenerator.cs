@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gemGenerator : MonoBehaviour
+public class gemGenerator : EndAble
 {
     public GameObject gemPrefab;  // 宝石预制体
     public Transform spawnPoint;  // 宝石生成的位置
@@ -19,7 +19,8 @@ public class gemGenerator : MonoBehaviour
 
     private void Update()
     {
-
+        if (ifEndGame)
+            return;
         if (Input.GetKeyDown(KeyCode.H))
             StartGeneratingGems();
 
@@ -85,4 +86,8 @@ public class gemGenerator : MonoBehaviour
             gemScript.initializeJem(genAngle, forceTimer);
         }
     }
+
+    
 }
+
+

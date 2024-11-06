@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class weaponManager : MonoBehaviour
+public class weaponManager : EndAble
 {
 
     public List<GameObject> allCorpse;
@@ -32,6 +32,8 @@ public class weaponManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ifEndGame)
+            return;
         if (Input.GetKeyDown(KeyCode.J))
             addOne(Color.white);
     }
