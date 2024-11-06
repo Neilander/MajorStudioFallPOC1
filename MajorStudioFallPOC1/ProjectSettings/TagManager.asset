@@ -48,3 +48,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: temple
+    uniqueID: 1061400297
+    locked: 0
