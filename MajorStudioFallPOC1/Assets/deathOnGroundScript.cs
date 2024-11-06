@@ -5,6 +5,9 @@ using UnityEngine;
 public class deathOnGroundScript : MonoBehaviour
 {
     public bool ifLeft = false;
+
+    public float destroyY;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +17,9 @@ public class deathOnGroundScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (transform.position.y < destroyY)
+        {
+            Destroy(gameObject);
+        }
     }
 }

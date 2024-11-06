@@ -9,6 +9,10 @@ public class gemGenerator : MonoBehaviour
     private int gemCount = 20;    // 生成宝石的数量
     private float spawnInterval = 0.2f; // 每个宝石生成的时间间隔
 
+    [Header("player gem constant")]
+    public float genAngle;
+    public float forceTimer;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
@@ -38,5 +42,24 @@ public class gemGenerator : MonoBehaviour
             // 等待指定的间隔时间
             yield return new WaitForSeconds(spawnInterval);
         }
+    }
+
+    public void GenInOnce(int n)
+    {
+        Debug.Log("来了！进行"+n+"次");
+        for (int i = 0; i <n; i++)
+        {
+            // 实例化宝石并设置位置
+            GameObject gem = Instantiate(gemPrefab, spawnPoint.position, Quaternion.identity);
+
+            // 调用宝石的 initializeJem 方法
+            gemScript gemScript = gem.GetComponent<gemScript>();
+            if (gemScript != null)
+            {
+                gemScript.initializeJem(genAngle,forceTimer);
+            }
+        }
+
+        Destroy(gameObject);
     }
 }

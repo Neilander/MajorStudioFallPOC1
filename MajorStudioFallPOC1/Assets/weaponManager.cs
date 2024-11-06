@@ -36,12 +36,12 @@ public class weaponManager : MonoBehaviour
             addOne(Color.white);
     }
 
-    public void resetWeapon()
+    public void resetWeapon(bool ifGen = true)
     {
         curIndex = 0;
         foreach (GameObject gmo in allCorpse)
         {
-            if(gmo.activeInHierarchy)
+            if(gmo.activeInHierarchy&& ifGen)
                 control.genCorpse(gmo.transform.position);
             gmo.SetActive(false);
             
