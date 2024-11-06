@@ -13,10 +13,23 @@ public class gemGenerator : MonoBehaviour
     public float genAngle;
     public float forceTimer;
 
+    public float autoSpawnInterval = 5f; // 自动生成宝石的时间间隔
+    private float autoSpawnTimer; // 计时器
+
+
     private void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.H))
             StartGeneratingGems();
+
+        // 自动生成宝石
+        autoSpawnTimer += Time.deltaTime;
+        if (autoSpawnTimer >= autoSpawnInterval)
+        {
+            GenerateSingleGem();
+            autoSpawnTimer = 0f; // 重置计时器
+        }
     }
 
     // 开始生成宝石的函数
@@ -61,5 +74,15 @@ public class gemGenerator : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    private void GenerateSingleGem()
+    {
+        GameObject gem = Instantiate(gemPrefab, spawnPoint.position, Quaternion.identity);
+        gemScript gemScript = gem.GetComponent<gemScript>();
+        if (gemScript != null)
+        {
+            gemScript.initializeJem(genAngle, forceTimer);
+        }
     }
 }

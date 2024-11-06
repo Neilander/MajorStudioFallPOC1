@@ -42,6 +42,9 @@ TagManager:
   - name: environment
     uniqueID: 2429051123
     locked: 0
+  - name: platform
+    uniqueID: 642976861
+    locked: 0
   - name: back
     uniqueID: 668487097
     locked: 0
