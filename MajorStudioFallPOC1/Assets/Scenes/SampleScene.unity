@@ -2493,7 +2493,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 1022748047}
   genAngle: 30
   forceTimer: 1.5
-  autoSpawnInterval: 5
+  autoSpawnInterval: 2
 --- !u!4 &1569135442
 Transform:
   m_ObjectHideFlags: 0
