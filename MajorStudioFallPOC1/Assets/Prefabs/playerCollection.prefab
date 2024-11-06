@@ -293,8 +293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6a8e6fc5f5148af8723e699a156942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ifEndGame: 0
   moveSpeed: 5
-  jumpForce: 13
+  jumpForce: 17
   groundCheck: {fileID: 948913069500603487}
   groundLayer:
     serializedVersion: 2
@@ -316,6 +317,7 @@ MonoBehaviour:
   scoreText: {fileID: 0}
   destroyY: -8.5
   generatorPrefab: {fileID: 2349428432560108117, guid: 3827ee58d84a04ccfb95b58bcaae8cff, type: 3}
+  curScore: 0
 --- !u!1 &7949515235389452361
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,6 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c670f34ecc8de470ba004f6448c2cf88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ifEndGame: 0
   allCorpse:
   - {fileID: 2826124918264125891}
   - {fileID: 4606707345377304953}
