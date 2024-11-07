@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.ScreenManagement;
+using UnityEngine.SceneManagement;
 
 public class titleScreenScript : MonoBehaviour
 {
@@ -28,6 +28,6 @@ public class titleScreenScript : MonoBehaviour
     {
         buttonSFX.Play();
         yield return new WaitForSeconds(1f); 
-        SceneManager.LoadScene("MajorStudioFallPOC1");
+        SceneManager.LoadScene("SampleScene");
     }
 }
