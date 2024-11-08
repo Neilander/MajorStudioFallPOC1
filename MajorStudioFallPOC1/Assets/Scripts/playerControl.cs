@@ -63,6 +63,7 @@ public class playerControl : EndAble
     // Update is called once per frame
     void Update()
     {
+   
         if (ifEndGame)
         {
             if (!rb.isKinematic)
