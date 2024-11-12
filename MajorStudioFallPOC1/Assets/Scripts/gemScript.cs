@@ -15,14 +15,18 @@ public class gemScript : EndAble
     public float floatAmplitude = 0.1f;      // 浮动的幅度
     public float floatFrequency = 2f;        // 浮动的频率
     private Vector3 originalPosition;         // 初始位置，用于浮动基准
-
+    public bool ifCollectable = false;
+    public float waitTime = 1f;
 
     public float destroyY = -12f;
+
+    public SpriteRenderer sprRenderer;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        Invoke("changeCollectable", waitTime);
+        StartCoroutine(ChangeColorOverTime());
     }
 
     void Update()
@@ -110,5 +114,28 @@ public class gemScript : EndAble
             Gizmos.color = Color.red; // 设置 Gizmo 的颜色为红色
             Gizmos.DrawWireCube(groundCheck.position, groundCheckSize); // 绘制检测区域的长方形边框
         }
+    }
+
+    void changeCollectable()
+    {
+        ifCollectable = true;
+    }
+
+    private IEnumerator ChangeColorOverTime()
+    {
+        float elapsedTime = 0f;
+        Color startColor = Color.black;
+        Color endColor = Color.white;
+        sprRenderer.color = Color.black;
+        while (elapsedTime < waitTime)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime /waitTime);
+            sprRenderer.color = Color.Lerp(startColor, endColor, t);
+            yield return null;
+        }
+
+        // 确保最终颜色为白色
+        sprRenderer.color = endColor;
     }
 }

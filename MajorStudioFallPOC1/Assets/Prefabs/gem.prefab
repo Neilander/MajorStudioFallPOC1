@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b954a96a08446cfa8a360468dd5b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ifEndGame: 0
   launchForce: 8
   rb: {fileID: 5998603757518644231}
   groundCheck: {fileID: 2459654702635636374}
@@ -296,7 +297,10 @@ MonoBehaviour:
   groundCheckSize: {x: 1, y: 0.1}
   floatAmplitude: 0.1
   floatFrequency: 2
+  ifCollectable: 0
+  waitTime: 0.3
   destroyY: -15
+  sprRenderer: {fileID: 6903663873656084944}
 --- !u!1 &9119859267162463442
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class playerControl : EndAble
     public int HpValue = 100;
     public weaponManager manager;
     public bool inControl = true;
+    public bool canMove = true;
     public Vector2 dropX;
     public bool isLeftSide = true;
     public GameObject corpse;
@@ -81,18 +82,37 @@ public class playerControl : EndAble
             // 检测是否在地面上
             isGrounded = CheckIfGrounded();//Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
-            
+            if (isGrounded)
+                canMove = true;
 
-            // 根据角色侧面区分输入
+            if (canMove)
+            {
+                // 根据角色侧面区分输入
+                if (isLeftSide)
+                {
+                    // 左侧角色使用 A/D 移动，W 跳跃，空格攻击
+                    float horizontalInput = 0;
+                    if (Input.GetKey(KeyCode.A)) horizontalInput = -1;
+                    else if (Input.GetKey(KeyCode.D)) horizontalInput = 1;
+
+                    HandleMovement(horizontalInput);
+                    HandleJump(Input.GetKeyDown(KeyCode.W));
+                }
+                else
+                {
+                    // 右侧角色使用 左/右箭头移动，上箭头跳跃，K 键攻击
+                    float horizontalInput = 0;
+                    if (Input.GetKey(KeyCode.LeftArrow)) horizontalInput = -1;
+                    else if (Input.GetKey(KeyCode.RightArrow)) horizontalInput = 1;
+
+                    HandleMovement(horizontalInput);
+                    HandleJump(Input.GetKeyDown(KeyCode.UpArrow));
+                    
+                }
+            }
+
             if (isLeftSide)
             {
-                // 左侧角色使用 A/D 移动，W 跳跃，空格攻击
-                float horizontalInput = 0;
-                if (Input.GetKey(KeyCode.A)) horizontalInput = -1;
-                else if (Input.GetKey(KeyCode.D)) horizontalInput = 1;
-
-                HandleMovement(horizontalInput);
-                HandleJump(Input.GetKeyDown(KeyCode.W));
                 HandleAttack(Input.GetKeyDown(KeyCode.Space));
                 // 左侧角色使用 Q 键消除最近的"corpseOnGround"物体
                 if (Input.GetKeyDown(KeyCode.Q))
@@ -102,13 +122,6 @@ public class playerControl : EndAble
             }
             else
             {
-                // 右侧角色使用 左/右箭头移动，上箭头跳跃，K 键攻击
-                float horizontalInput = 0;
-                if (Input.GetKey(KeyCode.LeftArrow)) horizontalInput = -1;
-                else if (Input.GetKey(KeyCode.RightArrow)) horizontalInput = 1;
-
-                HandleMovement(horizontalInput);
-                HandleJump(Input.GetKeyDown(KeyCode.UpArrow));
                 HandleAttack(Input.GetKeyDown(KeyCode.K));
                 // 右侧角色使用 L 键消除最近的"corpseOnGround"物体
                 if (Input.GetKeyDown(KeyCode.L))
@@ -116,6 +129,7 @@ public class playerControl : EndAble
                     RemoveClosestCorpse();
                 }
             }
+            
         }
         else
         {
@@ -124,6 +138,7 @@ public class playerControl : EndAble
             {
                 rb.gravityScale = 2;
                 inControl = true;
+                canMove = true;
             }
         }
 
@@ -270,6 +285,7 @@ public class playerControl : EndAble
             transform.position = new Vector3(Random.Range(dropX.x, dropX.y), 50, 0);
             rb.gravityScale = 1;
             inControl = false;
+            canMove = true;
             curHp = HpValue;
             if (recoverCor != null)
             {
@@ -284,7 +300,7 @@ public class playerControl : EndAble
             //dir.normalized*takeDamageForceScale
             Debug.Log("被打飞了！");
             rb.AddForce(dir.normalized*takeDamageForceScale*n, ForceMode2D.Impulse);
-            inControl = false;
+            canMove = false;
             if (recoverCor != null)
             {
                 StopCoroutine(recoverCor);
@@ -380,7 +396,7 @@ public class playerControl : EndAble
     IEnumerator recoverFromNoControl(float t)
     {
         yield return new WaitForSeconds(t);
-        inControl = true;
+        canMove = true;
     }
 
     IEnumerator waitForRecover(float t)
@@ -391,7 +407,7 @@ public class playerControl : EndAble
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<gemScript>() != null&& inControl)
+        if (collision.GetComponent<gemScript>() != null&& inControl&& collision.GetComponent<gemScript>().ifCollectable)
         {
             Destroy(collision.gameObject);
             curScore += 1;
