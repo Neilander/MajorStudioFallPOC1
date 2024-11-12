@@ -54,3 +54,6 @@ TagManager:
   - name: temple
     uniqueID: 1061400297
     locked: 0
+  - name: effect
+    uniqueID: 730377101
+    locked: 0

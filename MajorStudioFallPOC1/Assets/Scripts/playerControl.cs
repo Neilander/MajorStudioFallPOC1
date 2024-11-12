@@ -37,6 +37,9 @@ public class playerControl : EndAble
     [Header("gem generator after death")]
     public GameObject generatorPrefab;
 
+    public GameObject dustEffectPrefab;
+    public Vector3 posAdjust;
+
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -88,6 +91,12 @@ public class playerControl : EndAble
             if (isGrounded)
             {
                 canMove = true;
+                if (rb.gravityScale == quickFallDownScale)
+                {
+                    Instantiate(dustEffectPrefab, transform.position+posAdjust, Quaternion.Euler(-90,0,0)).GetComponent<ParticleSystem>().Play();
+
+                }
+                   
                 rb.gravityScale = originalScale;
             }
                 
