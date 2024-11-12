@@ -37,6 +37,8 @@ public class playerControl : EndAble
     [Header("gem generator after death")]
     public GameObject generatorPrefab;
 
+    public Color deathColor;
+
     public GameObject dustEffectPrefab;
     public Vector3 posAdjust;
 
@@ -65,6 +67,7 @@ public class playerControl : EndAble
         scaleX = transform.localScale.x;
         scaleY = transform.localScale.y;
         scaleZ = transform.localScale.z;
+        manager.addOne(deathColor);
     }
 
     // Update is called once per frame
@@ -188,7 +191,7 @@ public class playerControl : EndAble
             scoreText.text = "0";
 
             GameObject gmo = Instantiate(corpse, transform.position, Quaternion.identity);
-            gmo.GetComponent<SpriteRenderer>().color = isLeftSide ? Color.green : Color.red;
+            gmo.GetComponent<SpriteRenderer>().color = deathColor;
             gmo.GetComponent<deathOnGroundScript>().ifLeft = isLeftSide;
             manager.resetWeapon(false);
             transform.position = new Vector3(Random.Range(dropX.x, dropX.y), 50, 0);
@@ -305,7 +308,7 @@ public class playerControl : EndAble
             curScore = 0;
             scoreText.text = "0";
             GameObject gmo = Instantiate(corpse, transform.position, Quaternion.identity);
-            gmo.GetComponent<SpriteRenderer>().color = isLeftSide ? Color.green : Color.red;
+            gmo.GetComponent<SpriteRenderer>().color = deathColor;
             gmo.GetComponent<deathOnGroundScript>().ifLeft = isLeftSide;
             manager.resetWeapon();
             transform.position = new Vector3(Random.Range(dropX.x, dropX.y), 50, 0);
@@ -369,7 +372,7 @@ public class playerControl : EndAble
     public void genCorpse(Vector3 pos)
     {
         GameObject gmo = Instantiate(corpse, pos, Quaternion.identity);
-        gmo.GetComponent<SpriteRenderer>().color = isLeftSide ? Color.green : Color.red;
+        gmo.GetComponent<SpriteRenderer>().color = deathColor;
         gmo.GetComponent<deathOnGroundScript>().ifLeft = isLeftSide;
     }
 

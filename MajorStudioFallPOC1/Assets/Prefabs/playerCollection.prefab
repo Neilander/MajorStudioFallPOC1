@@ -321,6 +321,7 @@ MonoBehaviour:
   scoreText: {fileID: 0}
   destroyY: -8.5
   generatorPrefab: {fileID: 2349428432560108117, guid: 3827ee58d84a04ccfb95b58bcaae8cff, type: 3}
+  deathColor: {r: 0.9433962, g: 0.022249907, b: 0.022249907, a: 1}
   dustEffectPrefab: {fileID: 7434138515829542432, guid: d93d35b3fe0964f30adc319095ce1183, type: 3}
   posAdjust: {x: 0, y: 0.5, z: 0}
   curScore: 0

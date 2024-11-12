@@ -153,7 +153,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0fb3526eb5f344823879aac782039b7a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.401
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -714,7 +714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 03cc9831f7904f647846c110e3efa5f2, type: 3}
       propertyPath: m_SortingLayer
-      value: -2
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 03cc9831f7904f647846c110e3efa5f2, type: 3}
       propertyPath: m_SortingOrder
@@ -2237,6 +2237,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: deathColor.b
+      value: 0.94509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: deathColor.g
+      value: 0.02352941
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: deathColor.r
+      value: 0.4986605
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
       propertyPath: groundCheckSize.x
       value: 0.8
       objectReference: {fileID: 0}
@@ -3709,7 +3721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 2098085471}
-  currentTime: 60
+  currentTime: 150
   basicSize: 120
   increaseSize: 10
   target: {fileID: 8678670061087767040}
