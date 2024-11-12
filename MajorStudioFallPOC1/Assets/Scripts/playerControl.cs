@@ -25,6 +25,9 @@ public class playerControl : EndAble
     public float takeDamageForceScale;
     public float waitTimeToRecover;
     public float healthRecoverThreshold = 5f;
+    [Header("grravity scale")]
+    public float originalScale = 2f;
+    public float quickFallDownScale = 5f;
     [Header("Score Ui")]
     public TextMeshProUGUI scoreText;
 
@@ -83,7 +86,11 @@ public class playerControl : EndAble
             isGrounded = CheckIfGrounded();//Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
             if (isGrounded)
+            {
                 canMove = true;
+                rb.gravityScale = originalScale;
+            }
+                
 
             if (canMove)
             {
@@ -97,6 +104,7 @@ public class playerControl : EndAble
 
                     HandleMovement(horizontalInput);
                     HandleJump(Input.GetKeyDown(KeyCode.W));
+                    HandFall(Input.GetKeyDown(KeyCode.S));
                 }
                 else
                 {
@@ -107,7 +115,8 @@ public class playerControl : EndAble
 
                     HandleMovement(horizontalInput);
                     HandleJump(Input.GetKeyDown(KeyCode.UpArrow));
-                    
+                    HandFall(Input.GetKeyDown(KeyCode.DownArrow));
+
                 }
             }
 
@@ -136,7 +145,7 @@ public class playerControl : EndAble
             isGrounded = CheckIfGrounded();
             if (isGrounded)
             {
-                rb.gravityScale = 2;
+                rb.gravityScale = originalScale;
                 inControl = true;
                 canMove = true;
             }
@@ -201,6 +210,14 @@ public class playerControl : EndAble
         if (jumpKeyPressed && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+    }
+
+    private void HandFall(bool fallKeyPressed)
+    {
+        if (fallKeyPressed && !isGrounded && inControl)
+        {
+            rb.gravityScale = quickFallDownScale;
         }
     }
 

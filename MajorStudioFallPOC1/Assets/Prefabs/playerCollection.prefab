@@ -304,6 +304,7 @@ MonoBehaviour:
   HpValue: 20
   manager: {fileID: 8568943243336367375}
   inControl: 1
+  canMove: 1
   dropX: {x: -4, y: 4}
   isLeftSide: 1
   corpse: {fileID: 1177207620986224408, guid: 99601919d9f344b9795945c533175a82, type: 3}
@@ -314,6 +315,8 @@ MonoBehaviour:
   takeDamageForceScale: 2
   waitTimeToRecover: 1
   healthRecoverThreshold: 2
+  originalScale: 2
+  quickFallDownScale: 20
   scoreText: {fileID: 0}
   destroyY: -8.5
   generatorPrefab: {fileID: 2349428432560108117, guid: 3827ee58d84a04ccfb95b58bcaae8cff, type: 3}
