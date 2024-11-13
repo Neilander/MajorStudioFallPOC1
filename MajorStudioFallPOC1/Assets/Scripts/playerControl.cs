@@ -30,6 +30,7 @@ public class playerControl : EndAble
     public float quickFallDownScale = 5f;
     [Header("Score Ui")]
     public TextMeshProUGUI scoreText;
+    public textScript txt;
 
     [Header("death check height")]
     public float destroyY = -8.5f;
@@ -441,6 +442,7 @@ public class playerControl : EndAble
             Destroy(collision.gameObject);
             curScore += 1;
             scoreText.text = curScore.ToString();
+            txt.lightUp();
         }
     }
 }
