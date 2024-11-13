@@ -415,7 +415,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278194175
-  m_fontColor: {r: 1, g: 0.057309136, b: 0, a: 1}
+  m_fontColor: {r: 0.54337645, g: 0, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3919,6 +3919,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   textMoveOffset: {x: 0, y: 50, z: 0}
   animationDuration: 1
+  endColor1: {r: 0.745283, g: 0.0738252, b: 0.0738252, a: 1}
+  endColor2: {r: 0.54509807, g: 0, b: 1, a: 1}
 --- !u!1001 &4437053147670766386
 PrefabInstance:
   m_ObjectHideFlags: 0

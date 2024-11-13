@@ -31,7 +31,10 @@ public class timer : MonoBehaviour
     public AnimationCurve colorCurve;
     public Vector3 textMoveOffset = new Vector3(0, 1, 0); // 移动的目标偏移量
     public float animationDuration = 1f;
-    
+
+    [Header("end color")]
+    public Color endColor1;
+    public Color endColor2;
 
     private void Start()
     {
@@ -142,7 +145,7 @@ public class timer : MonoBehaviour
         float elapsedTime = 0f;
 
         bool set = false;
-        Color startColor = textMesh.color;
+        Color startColor = (p1.curScore > p2.curScore)?endColor1:endColor2;
         Color endColor = startColor;
         endColor.a = 1f; // 最终颜色为完全不透明
 
