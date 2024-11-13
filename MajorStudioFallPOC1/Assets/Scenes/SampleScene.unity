@@ -3860,7 +3860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 2098085471}
-  currentTime: 60
+  currentTime: 120
   basicSize: 120
   increaseSize: 10
   target: {fileID: 8678670061087767040}
