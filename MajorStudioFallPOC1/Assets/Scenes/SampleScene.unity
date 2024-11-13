@@ -3860,7 +3860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 2098085471}
-  currentTime: 10
+  currentTime: 60
   basicSize: 120
   increaseSize: 10
   target: {fileID: 8678670061087767040}
@@ -4206,6 +4206,10 @@ PrefabInstance:
     - target: {fileID: 3556585105444743053, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 3783328740879429762, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4583651954666533595, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
       propertyPath: m_Name

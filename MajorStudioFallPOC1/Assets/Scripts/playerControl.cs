@@ -38,6 +38,10 @@ public class playerControl : EndAble
     [Header("gem generator after death")]
     public GameObject generatorPrefab;
 
+
+    public float invulTime = 3f;
+    public GameObject invulLightObj;
+
     public Color deathColor;
 
     public GameObject dustEffectPrefab;
@@ -58,6 +62,9 @@ public class playerControl : EndAble
     private Coroutine recoverCor;
     private Coroutine healthRecoverCor;
     public int curScore = 0;
+
+    private bool invulnerable = false;
+    private Coroutine invulCor;
     
 
     // Start is called before the first frame update
@@ -199,6 +206,9 @@ public class playerControl : EndAble
             rb.gravityScale = 1;
             inControl = false;
             curHp = HpValue;
+            invulnerable = true;
+            invulLightObj.SetActive(true);
+            startWaitForInvul();
             if (recoverCor != null)
             {
                 StopCoroutine(recoverCor);
@@ -294,6 +304,9 @@ public class playerControl : EndAble
 
     public void takeDamage(int n, Vector2 dir)
     {
+        if (invulnerable)
+            return;
+
         Debug.Log(name + "收到了"+n+"点伤害,朝向"+dir.x+", "+dir.y);
         curHp -= n;
         healthRecover = false;
@@ -314,6 +327,9 @@ public class playerControl : EndAble
             manager.resetWeapon();
             transform.position = new Vector3(Random.Range(dropX.x, dropX.y), 50, 0);
             rb.gravityScale = 1;
+            invulnerable = true;
+            invulLightObj.SetActive(true);
+            startWaitForInvul();
             inControl = false;
             canMove = true;
             curHp = HpValue;
@@ -444,5 +460,21 @@ public class playerControl : EndAble
             scoreText.text = curScore.ToString();
             txt.lightUp();
         }
+    }
+
+    IEnumerator invulRe()
+    {
+        yield return new WaitForSeconds(invulTime);
+        invulnerable = false;
+        invulLightObj.SetActive(false);
+    }
+
+    private void startWaitForInvul()
+    {
+        if (invulCor != null)
+        {
+            StopCoroutine(invulCor);
+        }
+        invulCor = StartCoroutine(invulRe());
     }
 }
