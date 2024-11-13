@@ -38,6 +38,8 @@ public class playerControl : EndAble
     [Header("gem generator after death")]
     public GameObject generatorPrefab;
 
+    public Color DamageColorLevel1;
+    public Color DamageColorLevel2;
 
     public float invulTime = 3f;
     public GameObject invulLightObj;
@@ -81,7 +83,19 @@ public class playerControl : EndAble
     // Update is called once per frame
     void Update()
     {
-   
+        if (curHp > 15)
+        {
+            renderer.color = Color.white;
+        }
+        else if (curHp > 10 && curHp <= 15)
+        {
+            renderer.color = DamageColorLevel1;
+        }
+        else if (curHp <= 10)
+        {
+            renderer.color = DamageColorLevel2;
+        }
+
         if (ifEndGame)
         {
             if (!rb.isKinematic)

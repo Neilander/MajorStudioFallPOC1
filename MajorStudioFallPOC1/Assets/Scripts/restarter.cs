@@ -22,6 +22,9 @@ public class restarter : MonoBehaviour
             // 使用场景名称重新加载场景
             SceneManager.LoadScene(currentSceneName);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
             
     }
 }

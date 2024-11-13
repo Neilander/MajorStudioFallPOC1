@@ -2444,6 +2444,38 @@ PrefabInstance:
       propertyPath: groundCheckSize.x
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel1.g
+      value: 0.495283
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel1.r
+      value: 0.84653866
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel2.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel2.b
+      value: 0.6509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel2.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel2.r
+      value: 0.4539472
+      objectReference: {fileID: 0}
     - target: {fileID: 948913069500603487, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.09
@@ -4058,6 +4090,38 @@ PrefabInstance:
     - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
       propertyPath: groundCheckSize.x
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel1.b
+      value: 0.7122642
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel1.g
+      value: 0.7122642
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel2.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel2.b
+      value: 0.33524764
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel2.g
+      value: 0.3254717
+      objectReference: {fileID: 0}
+    - target: {fileID: 252880440749195232, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
+      propertyPath: DamageColorLevel2.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 948913069500603487, guid: 2d157518bbb864add8f066e647ff2a2d, type: 3}
       propertyPath: m_LocalPosition.y
