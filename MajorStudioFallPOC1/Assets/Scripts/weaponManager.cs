@@ -34,8 +34,11 @@ public class weaponManager : EndAble
     {
         if (ifEndGame)
             return;
+
+        /*
         if (Input.GetKeyDown(KeyCode.J))
             addOne(Color.white);
+        */
     }
 
     public void resetWeapon(bool ifGen = true)

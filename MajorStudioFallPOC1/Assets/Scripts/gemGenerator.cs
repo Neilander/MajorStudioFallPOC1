@@ -21,8 +21,11 @@ public class gemGenerator : EndAble
     {
         if (ifEndGame)
             return;
+
+        /*
         if (Input.GetKeyDown(KeyCode.H))
             StartGeneratingGems();
+        */
 
         // 自动生成宝石
         autoSpawnTimer += Time.deltaTime;

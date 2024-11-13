@@ -27,8 +27,10 @@ public class textScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.T))
             lightUp();
+        */
     }
 
     public void lightUp()
