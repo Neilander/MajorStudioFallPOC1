@@ -31,6 +31,7 @@ public class timer : MonoBehaviour
     public AnimationCurve colorCurve;
     public Vector3 textMoveOffset = new Vector3(0, 1, 0); // 移动的目标偏移量
     public float animationDuration = 1f;
+    
 
     private void Start()
     {
@@ -108,6 +109,7 @@ public class timer : MonoBehaviour
 
     private void endTheGame()
     {
+        timerText.enabled = false;
         foreach (EndAble ed in FindObjectsOfType<EndAble>())
         {
             ed.doEndGame();
@@ -134,11 +136,12 @@ public class timer : MonoBehaviour
 
     private IEnumerator TextMoveAndFadeEffect()
     {
-        textMesh.gameObject.SetActive(true);
+        
         Vector3 startPosition = textMesh.transform.position;
         Vector3 endPosition = startPosition + textMoveOffset;
         float elapsedTime = 0f;
 
+        bool set = false;
         Color startColor = textMesh.color;
         Color endColor = startColor;
         endColor.a = 1f; // 最终颜色为完全不透明
@@ -155,6 +158,12 @@ public class timer : MonoBehaviour
             // 根据 AnimationCurve 计算移动进度
             float curveValue = movementCurve.Evaluate(t);
             float colorcurveValue = colorCurve.Evaluate(t);
+
+            if (t > 0.2f && !set)
+            {
+                set = true;
+                textMesh.gameObject.SetActive(true);
+            }
 
             // 位置插值
             textMesh.transform.position = Vector3.Lerp(startPosition, endPosition, curveValue);
