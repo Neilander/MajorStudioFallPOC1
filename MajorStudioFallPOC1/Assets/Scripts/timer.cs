@@ -101,7 +101,7 @@ public class timer : MonoBehaviour
         }
         else
         {
-            timerText.color = Color.white;         // 设置颜色为白色
+            //timerText.color = Color.white;         // 设置颜色为白色
             timerText.fontSize = basicSize;               // 恢复原始字体大小
         }
     }
